@@ -1,1 +1,1 @@
-# calctcha - arithematic captcha
+# calctcha
