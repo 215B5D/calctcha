@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calctcha Demo</title>
+
+    <style>
+        body {
+            margin: 0;
+
+            color: #FFF;
+            background: #121212;
+            font-family: monospace, "sans-serif";
+        }
+
+        .container {
+            margin: auto;
+            max-width: 60vw;
+        }
+
+        .captcha {
+            margin: auto;
+            padding: 10px;
+
+            padding-left: 20px;
+            border-left: 4px solid #539;
+        }
+
+        input {
+            color: #FFF;
+
+            background: transparent;
+            border: 1px solid #539;
+
+            padding: 15px;
+        }
+
+        button {
+            color: #FFF;
+            font-family: monospace, "sans-serif";
+
+            background: #539;
+            border: none;
+
+            padding: 15px 20px;
+        }
+
+        button:hover {
+            background: transparent;
+            border: 1px solid #539;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Calctcha</h1>
+
+        <div class="captcha">
+            <img id="captcha" />
+        </div>
+
+        <br />
+
+        <input id="value" placeholder="Captcha" />
+        <button onclick="alert('Submitted!')">Submit</button>
+        <button onclick="getCaptcha()">Refresh</button>
+    </div>
+
+    <script>
+        const getCaptcha = async () => {
+          const { captcha } = await(await fetch("/captcha")).json();
+
+          if(!captcha)
+            return alert("Unable to fetch Calctcha!");
+
+          document.getElementById("captcha").src = captcha;
+        }
+
+        window.onload = async () => await getCaptcha();
+    </script>
+</body>
+</html>
